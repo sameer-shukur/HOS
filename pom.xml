@@ -47,4 +47,12 @@
 </dependency>
 
 </dependencies>
+
+<distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>jfrog-releases</name>
+        <url>http://jfrog.cloudapp.net:8081/artifactory/ext-release-local</url>
+    </repository>
+</distributionManagement>
 </project>
