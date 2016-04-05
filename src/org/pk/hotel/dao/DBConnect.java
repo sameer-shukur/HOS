@@ -20,7 +20,7 @@ public class DBConnect {
 	private static Connection connection = null;
 	private static String DRIVER_NAME = "com.mysql.jdbc.Driver";
 	private static String DATABASE_NAME = "hotel_order";
-	private static String DB_URL = "jdbc:mysql://localhost:3306/"
+	private static String DB_URL = "jdbc:mysql://dbmysql.cloudapp.net:3306/"
 			+ DBConnect.DATABASE_NAME;
 	private static String USER_NAME = "root";
 	private static String PASSWORD = "root";
