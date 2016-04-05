@@ -1,81 +1,90 @@
-Êşº¾   3!  org/pk/hotel/dao/DBConnect  java/lang/Object 
-connection Lcom/mysql/jdbc/Connection; DRIVER_NAME Ljava/lang/String; DATABASE_NAME DB_URL 	USER_NAME PASSWORD <clinit> ()V Code	      com.mysql.jdbc.Driver	      hotel_order	   	   java/lang/StringBuilder  jdbc:mysql://dbmysql.cloudapp.net:3306/
+ÃŠÃ¾ÂºÂ¾   3!  org/pk/hotel/dao/DBConnect  java/lang/Object 
+connection Lcom/mysql/jdbc/Connection; DRIVER_NAME Ljava/lang/String; 
+DATABASE_NAME DB_URL 	USER_NAME PASSWORD <clinit> ()V Code	      com.mysql.jdbc.Driver	      hotel_order	   	   java/lang/StringBuilder  jdbc:mysql://13.92.184.110:3306/
      ! <init> (Ljava/lang/String;)V
   # $ % append -(Ljava/lang/String;)Ljava/lang/StringBuilder;
   ' ( ) toString ()Ljava/lang/String;	  + 
   - root	  /  	  1   LineNumberTable LocalVariableTable
-  5    this Lorg/pk/hotel/dao/DBConnect; getConnection ()Lcom/mysql/jdbc/Connection;
+  5    this Lorg/pk/hotel/dao/DBConnect; 
+getConnection ()Lcom/mysql/jdbc/Connection;
  ; = < java/lang/Class > ? forName %(Ljava/lang/String;)Ljava/lang/Class;
  A C B java/sql/DriverManager 8 D M(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection; F com/mysql/jdbc/Connection	 H J I java/lang/System K L out Ljava/io/PrintStream;
  N P O java/io/PrintStream Q R println (Ljava/lang/Object;)V
  T ' U java/sql/SQLException
- N W Q ! Y  java/lang/ClassNotFoundException con cne "Ljava/lang/ClassNotFoundException; sqle Ljava/sql/SQLException; StackMapTable closeConnection E b c  close 
+ N W Q ! Y  java/lang/ClassNotFoundException con cne "Ljava/lang/ClassNotFoundException; sqle Ljava/sql/SQLException; 
+StackMapTable closeConnection E b c  close 
 checkLogin (Lorg/pk/hotel/beans/Login;)Z g 2select user_name,pass from login where user_name='
  i k j org/pk/hotel/beans/Login l ) getUserName n ' and pass='
  i p q ) getPassword s '
   u 8 9	 w y x java/lang/Boolean z { FALSE Ljava/lang/Boolean;
- w } ~  booleanValue ()Z E  ‚ ƒ createStatement ()Ljava/sql/Statement; … com/mysql/jdbc/Statement „ ‡ ˆ ‰ executeQuery ((Ljava/lang/String;)Ljava/sql/ResultSet; ‹  Œ java/sql/ResultSet   next	 w  ‘ { TRUE
-  “ `  •  Connection is null in checkLogin — sqle in checkLogin - 
-  ™ $ š -(Ljava/lang/Object;)Ljava/lang/StringBuilder; login Lorg/pk/hotel/beans/Login; SQL result Z st Lcom/mysql/jdbc/Statement; rs Ljava/sql/ResultSet; ¥ java/lang/String isAlreadyExists (Ljava/lang/String;)Z © &select name from category where name=' « %Connection is null in isAlreadyExists ­ sqle in isAlreadyExists -  name addCategory ± #insert into category(name) values(' ³ ') „ µ ¶ · executeUpdate (Ljava/lang/String;)I ¹ !Connection is null in addCategory » sqle in addCategory -  update I isItemAlreadyExists À "select name from item where name=' Â )Connection is null in isItemAlreadyExists Ä sqle in isItemAlreadyExists -  itemName addItem (Lorg/pk/hotel/beans/Item;)Z É 7insert into item(name, category_id, qnt, cost) values('
- Ë Í Ì org/pk/hotel/beans/Item Î ) getItemName Ğ ', 
- Ë Ò Ó Ô getCategoryId ()I
-  Ö $ × (I)Ljava/lang/StringBuilder; Ù , 
- Ë Û Ü Ô getQnt Ş , '
- Ë à á ) getCost item Lorg/pk/hotel/beans/Item; getAllCategory ()Ljava/util/ArrayList; 	Signature 6()Ljava/util/ArrayList<Lorg/pk/hotel/beans/Category;>; é SELECT * FROM category ë java/util/ArrayList
- ê 5 î org/pk/hotel/beans/Category
- í 5 ñ id ‹ ó ô · getInt
- í ö ÷ ø setId (I)V ® ‹ û ü ı 	getString &(Ljava/lang/String;)Ljava/lang/String;
- í ÿ  ! setCategoryName
- ê add (Ljava/lang/Object;)Z !connection is null getAllCategory java/lang/Exception cats Ljava/util/ArrayList; c Lorg/pk/hotel/beans/Category; e Ljava/lang/Exception; LocalVariableTypeTable 4Ljava/util/ArrayList<Lorg/pk/hotel/beans/Category;>; getAllOrders 9()Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderMaster;>; +SELECT * FROM order_master where status !='	 *org/pk/hotel/beans/OrderMaster$OrderStatus 	DELIVERED ,Lorg/pk/hotel/beans/OrderMaster$OrderStatus;
- ® ) ' and order_date = curdate()  org/pk/hotel/beans/OrderMaster
+ w } ~  booleanValue ()Z E Â â€š Æ’ createStatement ()Ljava/sql/Statement; â€¦ com/mysql/jdbc/Statement â€ â€¡ Ë† â€° executeQuery ((Ljava/lang/String;)Ljava/sql/ResultSet; â€¹ Â Å’ java/sql/ResultSet Å½  next	 w Â â€˜ { TRUE
+  â€œ `  â€¢  Connection is null in checkLogin â€” sqle in checkLogin - 
+  â„¢ $ Å¡ -(Ljava/lang/Object;)Ljava/lang/StringBuilder; login Lorg/pk/hotel/beans/Login; SQL result Z st Lcom/mysql/jdbc/Statement; rs Ljava/sql/ResultSet; Â¥ java/lang/String isAlreadyExists (Ljava/lang/String;)Z Â© &select name from category where name=' Â« %Connection is null in isAlreadyExists Â­ sqle in isAlreadyExists -  name addCategory Â± #insert into category(name) values(' Â³ ') â€ Âµ Â¶ Â· 
+executeUpdate (Ljava/lang/String;)I Â¹ !Connection is null in addCategory Â» sqle in addCategory -  update I isItemAlreadyExists Ã€ "select name from item where name=' Ã‚ )Connection is null in isItemAlreadyExists Ã„ sqle in isItemAlreadyExists -  itemName addItem (Lorg/pk/hotel/beans/Item;)Z Ã‰ 7insert into item(name, category_id, qnt, cost) values('
+ Ã‹ Ã ÃŒ org/pk/hotel/beans/Item Ã ) getItemName Ã ', 
+ Ã‹ Ã’ Ã“ Ã” 
+getCategoryId ()I
+  Ã– $ Ã— (I)Ljava/lang/StringBuilder; Ã™ , 
+ Ã‹ Ã› Ãœ Ã” getQnt Ã , '
+ Ã‹ Ã  Ã¡ ) getCost item Lorg/pk/hotel/beans/Item; getAllCategory ()Ljava/util/ArrayList; 	Signature 6()Ljava/util/ArrayList<Lorg/pk/hotel/beans/Category;>; Ã© SELECT * FROM category Ã« java/util/ArrayList
+ Ãª 5 Ã® org/pk/hotel/beans/Category
+ Ã­ 5 Ã± id â€¹ Ã³ Ã´ Â· getInt
+ Ã­ Ã¶ Ã· Ã¸ setId (I)V Â® â€¹ Ã» Ã¼ Ã½ 	getString &(Ljava/lang/String;)Ljava/lang/String;
+ Ã­ Ã¿  ! setCategoryName
+ Ãª add (Ljava/lang/Object;)Z !connection is null getAllCategory java/lang/Exception cats Ljava/util/ArrayList; c Lorg/pk/hotel/beans/Category; e Ljava/lang/Exception; LocalVariableTypeTable 4Ljava/util/ArrayList<Lorg/pk/hotel/beans/Category;>; getAllOrders 9()Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderMaster;>; +SELECT * FROM order_master where status !='	 *org/pk/hotel/beans/OrderMaster$OrderStatus 	DELIVERED ,Lorg/pk/hotel/beans/OrderMaster$OrderStatus;
+ Â® ) ' and order_date = curdate()  org/pk/hotel/beans/OrderMaster
  5
- ö$ table_no
-&' ø 
+ Ã¶$ table_no
+&' Ã¸ 
 setTableNo
 )* ! setOrderName, 
-order_date ‹./0 getDate #(Ljava/lang/String;)Ljava/sql/Date;
-2 '3 java/sql/Date
+order_date â€¹./0 getDate #(Ljava/lang/String;)Ljava/sql/Date;
+2 '3 
+java/sql/Date
 56 ! setDate8 
 order_time: status
 <=> getOrderStat @(Ljava/lang/String;)Lorg/pk/hotel/beans/OrderMaster$OrderStatus;
-@AB setOrderStat /(Lorg/pk/hotel/beans/OrderMaster$OrderStatus;)VD "connection is null in getAllOrdersF sqle in getAllOrders -  os om  Lorg/pk/hotel/beans/OrderMaster; 7Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderMaster;>; updateOrderStatus (ILjava/lang/String;)ZN  UPDATE order_master SET status='P ' where id=R 'Connection is null in updateOrderStatusT sqle in updateOrderStatus -  orderId getAllItems (I)Ljava/util/ArrayList; ;(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderDetails;>;Z íSELECT order_master.id, table_no, item.id, item.name, item.qnt, item.cost, order_details.status FROM order_master,order_details, item WHERE order_master.id = order_details.order_id and order_details.item_id = item.id and order_master.id=\ org/pk/hotel/beans/OrderDetails
+@AB setOrderStat /(Lorg/pk/hotel/beans/OrderMaster$OrderStatus;)VD "connection is null in getAllOrdersF sqle in getAllOrders -  os om  Lorg/pk/hotel/beans/OrderMaster; 7Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderMaster;>; updateOrderStatus (ILjava/lang/String;)ZN  UPDATE order_master SET status='P ' where id=R 'Connection is null in updateOrderStatusT sqle in updateOrderStatus -  orderId getAllItems (I)Ljava/util/ArrayList; ;(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderDetails;>;Z Ã­SELECT order_master.id, table_no, item.id, item.name, item.qnt, item.cost, order_details.status FROM order_master,order_details, item WHERE order_master.id = order_details.order_id and order_details.item_id = item.id and order_master.id=\ org/pk/hotel/beans/OrderDetails
 [ 5_ order_master.id
-[ ö
+[ Ã¶
 [&c item.id
-[ef ø 	setItemIdh 	item.name
+[ef Ã¸ 	setItemIdh 	item.name
 [jk ! setItemNamem item.qnt
-[op ø setQntr 	item.cost
+[op Ã¸ setQntr 	item.cost
 [tu ! setItemCostw order_details.status
 [y=z A(Ljava/lang/String;)Lorg/pk/hotel/beans/OrderDetails$OrderStatus;
-[|A} 0(Lorg/pk/hotel/beans/OrderDetails$OrderStatus;)V &connection is null in getAllItems(oID) sqle in getAllItems(oId) -  ods od !Lorg/pk/hotel/beans/OrderDetails; 8Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderDetails;>; updateItemStatus (IILjava/lang/String;)Z‰ !UPDATE order_details SET status='‹ ' where order_id=  and item_id= &Connection is null in updateItemStatus‘ sqle in updateItemStatus -  itemId getAllItemsByCategory 3(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/Item;>;– %SELECT * FROM item where category_id=
- Ë 5
- Ë öš category_id
- Ëœ ø setCategoryId
- Ëj  qnt
- Ëo£ cost
- Ë¥¦ ! setCost¨ 3connection is null in getAllItemsByCategory(itemId)ª (sqle in getAllItemsByCategory(itemId) -  catId items i 0Ljava/util/ArrayList<Lorg/pk/hotel/beans/Item;>; :(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderMaster;>;± ESELECT * FROM order_master where order_date = curdate() and table_no=³ +connection is null in getAllOrders(tableNo)µ  sqle in getAllOrders(tableNo) -  tableNo addOrder #(Lorg/pk/hotel/beans/OrderMaster;)Zº PINSERT INTO order_master(table_no, name, order_date, order_time, status) VALUES(
-¼½ Ô 
+[|A} 0(Lorg/pk/hotel/beans/OrderDetails$OrderStatus;)V &connection is null in getAllItems(oID)Â sqle in getAllItems(oId) -  ods od !Lorg/pk/hotel/beans/OrderDetails; 8Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderDetails;>; updateItemStatus (IILjava/lang/String;)Zâ€° !UPDATE order_details SET status='â€¹ ' where order_id=Â 
+ and item_id=Â &Connection is null in updateItemStatusâ€˜ sqle in updateItemStatus -  itemId getAllItemsByCategory 3(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/Item;>;â€“ %SELECT * FROM item where category_id=
+ Ã‹ 5
+ Ã‹ Ã¶Å¡ category_id
+ Ã‹Å“Â Ã¸ 
+setCategoryId
+ Ã‹jÂ  qnt
+ Ã‹oÂ£ cost
+ Ã‹Â¥Â¦ ! setCostÂ¨ 3connection is null in getAllItemsByCategory(itemId)Âª (sqle in getAllItemsByCategory(itemId) -  catId items i 0Ljava/util/ArrayList<Lorg/pk/hotel/beans/Item;>; :(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderMaster;>;Â± ESELECT * FROM order_master where order_date = curdate() and table_no=Â³ +connection is null in getAllOrders(tableNo)Âµ  sqle in getAllOrders(tableNo) -  tableNo addOrder #(Lorg/pk/hotel/beans/OrderMaster;)ZÂº PINSERT INTO order_master(table_no, name, order_date, order_time, status) VALUES(
+Â¼Â½ Ã” 
 getTableNo
-¿À ) getOrderNameÂ ', CURDATE(), CURTIME(), '
-Ä=Å .()Lorg/pk/hotel/beans/OrderMaster$OrderStatus;Ç ' )É Connection is null in addOrderË sqle in addOrder -  orderMaster getLastOrderIdÏ select * from order_masterÑ $Connection is null in getLastOrderIdÓ Error in getLastOrderId  addOrderedItems (Ljava/util/ArrayList;)Z ;(Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderDetails;>;)Z
- êØÙÚ iterator ()Ljava/util/Iterator;ÜŞİ java/util/Iterator ß ()Ljava/lang/Object;
- áâã addOrderItem $(Lorg/pk/hotel/beans/OrderDetails;)ZÜåæ  hasNext orderDetailsé AINSERT INTO order_details(order_id, item_id, qnt, status) VALUES(
-[ëì Ô 
+Â¿Ã€ ) getOrderNameÃ‚ ', CURDATE(), CURTIME(), '
+Ã„=Ã… .()Lorg/pk/hotel/beans/OrderMaster$OrderStatus;Ã‡ ' )Ã‰ Connection is null in addOrderÃ‹ sqle in addOrder -  orderMaster getLastOrderIdÃ select * from order_masterÃ‘ $Connection is null in getLastOrderIdÃ“ Error in getLastOrderId  addOrderedItems (Ljava/util/ArrayList;)Z ;(Ljava/util/ArrayList<Lorg/pk/hotel/beans/OrderDetails;>;)Z
+ ÃªÃ˜Ã™Ãš iterator ()Ljava/util/Iterator;ÃœÃÃ java/util/Iterator Å½ÃŸ ()Ljava/lang/Object;
+ Ã¡Ã¢Ã£ addOrderItem $(Lorg/pk/hotel/beans/OrderDetails;)ZÃœÃ¥Ã¦  hasNext orderDetailsÃ© AINSERT INTO order_details(order_id, item_id, qnt, status) VALUES(
+[Ã«Ã¬ Ã” 
 getOrderId
-[îï Ô 	getItemId
-[ Û
-[ò=ó /()Lorg/pk/hotel/beans/OrderDetails$OrderStatus;
-õö +org/pk/hotel/beans/OrderDetails$OrderStatusø 0connection is null in addOrderItem(OrderDetails)ú &Error in addOrderItem(OrderDetails) -  getBill :(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/BillDetails;>;şSELECT order_details.order_id, order_master.name, item.name, item.qnt, order_details.qnt, item.cost FROM order_details, order_master,item where order_details.order_id = order_master.id and item.id = order_details.item_id and order_date = curdate() and order_master.table_no=  org/pk/hotel/beans/BillDetails
-ÿ 5 order_details.order_id
-ÿ ö
-ÿ ø 
+[Ã®Ã¯ Ã” 	getItemId
+[ Ã›
+[Ã²=Ã³ /()Lorg/pk/hotel/beans/OrderDetails$OrderStatus;
+ÃµÃ¶ +org/pk/hotel/beans/OrderDetails$OrderStatusÃ¸ 0connection is null in addOrderItem(OrderDetails)Ãº &Error in addOrderItem(OrderDetails) -  getBill :(I)Ljava/util/ArrayList<Lorg/pk/hotel/beans/BillDetails;>;Ã¾SELECT order_details.order_id, order_master.name, item.name, item.qnt, order_details.qnt, item.cost FROM order_details, order_master,item where order_details.order_id = order_master.id and item.id = order_details.item_id and order_date = curdate() and order_master.table_no=  org/pk/hotel/beans/BillDetails
+Ã¿ 5 order_details.order_id
+Ã¿ Ã¶
+Ã¿ Ã¸ 
 setOrderId	 order_master.name
-ÿ)
-ÿj
-ÿ ø 
+Ã¿)
+Ã¿j
+Ã¿
+ Ã¸ 
 setItemQnt order_details.qnt
-ÿ ø setOrderQnt
-ÿt &connection is null in getBill(tableNo) Error in getBill(tableNo) -  bdetails bd  Lorg/pk/hotel/beans/BillDetails; 7Ljava/util/ArrayList<Lorg/pk/hotel/beans/BillDetails;>; 
+Ã¿ Ã¸ setOrderQnt
+Ã¿t &connection is null in getBill(tableNo) Error in getBill(tableNo) -  bdetails bd  Lorg/pk/hotel/beans/BillDetails; 7Ljava/util/ArrayList<Lorg/pk/hotel/beans/BillDetails;>; 
 SourceFile DBConnect.java InnerClasses OrderStatus !      
      
      
@@ -83,32 +92,52 @@ SourceFile DBConnect.java InnerClasses OrderStatus !     
  
     
      
-             n      .³ ³ ³ » Y· ² ¶ "¶ &³ *,³ .,³ 0±    2   & 	      	        #  (  -  3              /     *· 4±    2        3        6 7   	 8 9     Ã     3K² ¸ :W² *² .² 0¸ @À EK*°L² G+¶ M§ L² G+¶ S¶ V*°     X   & T  2   .       	    !     "  #  $ & % ' & 1 ( 3       1 Z      [ \  ' 
- ] ^  _    ÿ   E  XJ T
-  `      w     ² Æ ² ¹ a § L² G+¶ S¶ V±      T  2       .  /  0  1  3 3        6 7    
+       
+      n      .Â³ Â³ Â³ Â» YÂ· Â² Â¶ "Â¶ &Â³ *,Â³ .,Â³ 0Â±    2   & 	      	        #  (  -  3              /     *Â· 4Â±    2        3        6 7   	 8 9     Ãƒ     3KÂ² Â¸ :WÂ² *Â² .Â² 0Â¸ @Ã€ EK*Â°LÂ² G+Â¶ MÂ§ LÂ² G+Â¶ SÂ¶ V*Â°     X   & T  2   .       	    !     "  #  $ & % ' & 1 ( 3       1 Z      [ \  ' 
+ ] ^  _    Ã¿   E  XJ T
+  `      w     Â² Ã† Â² Â¹ a Â§ LÂ² G+Â¶ SÂ¶ VÂ±      T  2       .  /  0  1  3 3        6 7    
  ] ^  _    B T
-  d e    n     —» Yf· +¶ h¶ "m¶ "+¶ o¶ "r¶ "¶ &M¸ t³ ² v¶ |>² Æ <² ¹ € À „:,¹ † :¹ Š ™ ² ¶ |>§ 
-² v¶ |>*¶ ’§ '² G”¶ V§ :² G» Y–· ¶ ˜¶ &¶ V¬  2 y | T  2   F    6 	 7  8 ! 6 % 9 + : 2 < 8 = E > O ? Y @ c B j C q E | G ~ H • J 3   H    — 6 7     — › œ  % r    2 e  Ÿ  E ,   ¡  O " ¢ £  ~  ] ^  _   # ÿ c   i ¤ „ ‹  ù B T  ¦ §    D     ~» Y¨· +¶ "r¶ "¶ &M¸ t³ ² v¶ |>² Æ 2² ¹ € À „:,¹ † :¹ Š ™ 
-² ¶ |>*¶ ’§ '² Gª¶ V§ :² G» Y¬· ¶ ˜¶ &¶ V¬  # ` c T  2   6    N  O  P # R ) S 6 T @ U J V Q X X Z c \ e ] | _ 3   H    ~ 6 7     ~ ®    h    # [  Ÿ  6 "   ¡  @  ¢ £  e  ] ^  _   " ÿ Q   ¤ ¤ „ ‹  ù B T  ¯ §    =     y» Y°· +¶ "²¶ "¶ &M¸ t³ ² v¶ |>² Æ -² ¹ € À „:,¹ ´ 6 
-² ¶ |>*¶ ’§ '² G¸¶ V§ :² G» Yº· ¶ ˜¶ &¶ V¬  # [ ^ T  2   6    c  d  e # g ) h 6 i @ j E k L m S o ^ q ` r w t 3   H    y 6 7     y ®    c    # V  Ÿ  6    ¡  @  ¼ ½  `  ] ^  _     ÿ L   ¤ ¤ „  ù B T  ¾ §    D     ~» Y¿· +¶ "r¶ "¶ &M¸ t³ ² v¶ |>² Æ 2² ¹ € À „:,¹ † :¹ Š ™ 
-² ¶ |>*¶ ’§ '² GÁ¶ V§ :² G» YÃ· ¶ ˜¶ &¶ V¬  # ` c T  2   6    y  z  { # } ) ~ 6  @ € J  Q ƒ X … c ‡ e ˆ | Š 3   H    ~ 6 7     ~ Å    h    # [  Ÿ  6 "   ¡  @  ¢ £  e  ] ^  _   " ÿ Q   ¤ ¤ „ ‹  ù B T  Æ Ç    p      » YÈ· +¶ Ê¶ "Ï¶ "+¶ Ñ¶ ÕØ¶ "+¶ Ú¶ Õİ¶ "+¶ ß¶ "²¶ "¶ &M¸ t³ ² v¶ |>² Æ -² ¹ € À „:,¹ ´ 6 
-² ¶ |>*¶ ’§ '² G¸¶ V§ :² G» Yº· ¶ ˜¶ &¶ V¬  J ‚ … T  2   B     	  !  9  = ‘ C ’ J ” P • ] – g — l ˜ s š z œ …  ‡ Ÿ  ¡ 3   H      6 7       â ã  = c    J V  Ÿ  ]    ¡  g  ¼ ½  ‡  ] ^  _     ÿ s   Ë ¤ „  ù B T  ä å  æ    ç   ‚     “èL» êY· ìMN¸ t³ ² Æ V² ¹ € À „:+¹ † :§ +» íY· ïN-ğ¹ ò ¶ õ-ù¹ ú ¶ ş,-¶W¹ Š šÿÑ*¶ ’§ (² G¶ V§ :² G» Yº· ¶ ˜¶ &¶ V,°   u x  2   J    Û  Ü  İ  ß  à  á & â 0 ã 3 ä ; å H æ U ç [ ã e é l ë x í z î ‘ ğ 3   H    “ 6 7         ˆ	
-   †  & F   ¡  0 < ¢ £  z        ˆ	  _   % ÿ 3   ¤ ê í „ ‹  'ù B  å  æ      ı     ì» Y· ²¶¶ "¶ "¶ &L» êY· ìMN¸ t³ ² Æ ”² ¹ € À „:+¹ † :§ i»Y·!N-ğ¹ ò ¶"-#¹ ò ¶%-ù¹ ú ¶(-+¹- ¶1¶4-7¹ ú ¶4-9¹ ú ¸;¶?,-¶W¹ Š šÿ“*¶ ’§ )² GC¶ V§ :² G» YE· ¶ ˜¶ &¶ V,°  ' Í Ğ  2   j    ô 
- õ  ô  ö % ÷ ' ù - ú 3 û @ ü J ı M ş U ÿ b  p }  œ Ÿ § ­ ³ ı ½	 Ä Ğ Ò ê 3   H    ì 6 7    Ï    % ÇG
-  ' ÅHI  @ „   ¡  J z ¢ £  Ò       % ÇGJ  _   ' ÿ M   ¤ ê „ ‹  û eù B KL    [     „» YM· ,¶ "O¶ "¶ Õ¶ &N¸ t³ ² v¶ |6² Æ .² ¹ € À „:-¹ ´ 6 ² ¶ |6*¶ ’§ )² GQ¶ V§ :² G» YS· ¶ ˜¶ &¶ V¬  * d g T  2   >       " * 0 = G L T [! g# i$ & 3   R    „ 6 7     „U ½    „:    h    * Z  Ÿ  =    ¡  G  ¼ ½  i  ] ^  _   ! ÿ T   ¤ ¤ „  ù B T VW  æ   X        ø» YY· ¶ Õ¶ &M» êY· ìN:¸ t³ ² Æ ª² ¹ € À „:,¹ † :§ »[Y·]:^¹ ò ¶`#¹ ò ¶ab¹ ò ¶dg¹ ú ¶il¹ ò ¶nq¹ ú ¶sv¹ ú ¸x¶{-¶W¹ Š šÿ}*¶ ’§ )² G~¶ V§ :² G» Y€· ¶ ˜¶ &¶ V-°   Ù Ü  2   n   * 
-- * . / 1 #2 )3 64 @5 C6 L7 [8 j9 y: ˆ; —< ¦= ª> ²= ¸? ¿5 ÉA ĞC ÜE ŞF öH 3   R    ø 6 7     øU ½   æ     Ş‚
-   Ûƒ„  6 š   ¡  @  ¢ £  Ş        Ş‚…  _   ( ÿ C   ¤ ê[ „ ‹  û {ù B †‡    r     » Yˆ· -¶ "Š¶ "¶ ÕŒ¶ "¶ Õ¶ &:¸ t³ ² v¶ |6² Æ /² ¹ € À „:¹ ´ 6 ² ¶ |6*¶ ’§ )² G¶ V§ :² G» Y· ¶ ˜¶ &¶ V¬  5 p s T  2   >   L M "L 'N -O 5Q ;R HS ST XU `W gY s[ u\ ^ 3   \ 	    6 7     U ½    ’ ½    :   ' i    5 [  Ÿ  H    ¡  S  ¼ ½  u  ] ^  _   " ÿ `   ¤ ¤ „  ù B T “W  æ   ”   á     Õ» Y•· ¶ Õ¶ &M» êY· ìN:¸ t³ ² Æ ‡² ¹ € À „:,¹ † :§ \» ËY·—:ğ¹ ò ¶˜™¹ ò ¶›ù¹ ú ¶Ÿ¹ ò ¶¡¢¹ ú ¶¤-¶W¹ Š šÿ *¶ ’§ )² G§¶ V§ :² G» Y©· ¶ ˜¶ &¶ V-°   ¶ ¹  2   Z   b c d f #g )h 6i @j Ck Ll Zm in wo †p •q œj ¦s ­u °v ¹x »y Ó{ 3   R    Õ 6 7     Õ« ½   Ã     »¬
-   ¸­ ã  6 w   ¡  @ m ¢ £  »        »¬®  _   ( ÿ C   ¤ ê Ë „ ‹  û Xù B W  æ   ¯   
-     ê» Y°· ¶ Õ¶ &M» êY· ìN:¸ t³ ² Æ œ² ¹ € À „:,¹ † :§ q»Y·!:ğ¹ ò ¶"#¹ ò ¶%ù¹ ú ¶(+¹- ¶1¶47¹ ú ¶49¹ ú ¸;¶?-¶W¹ Š šÿ‹*¶ ’§ )² G²¶ V§ :² G» Y´· ¶ ˜¶ &¶ V-°   Ë Î  2   n    
-€   ‚ „ #… )† 6‡ @ˆ C‰ LŠ Z‹ iŒ w ‰ ˜ œ ¤ ª’ ±ˆ »” Â– Å— Î™ Ğš èœ 3   R    ê 6 7     ê¶ ½   Ø     ĞG
-   ÍHI  6 Œ   ¡  @ ‚ ¢ £  Ğ        ĞGJ  _   ( ÿ C   ¤ ê „ ‹  û mù B ·¸    x     œ» Y¹· +¶»¶ Õİ¶ "+¶¾¶ "Á¶ "+¶Ã¶¶ "Æ¶ "¶ &M¸ t³ ² v¶ |>² Æ -² ¹ € À „:,¹ ´ 6 
-² ¶ |>*¶ ’§ )² GÈ¶ V§ :² G» YÊ· ¶ ˜¶ &¶ V¬  D } € T  2   N     
-¢ £ ¤ ¥ #¦ 3  7§ =¨ Dª J« W¬ a­ f® m° t² €´ ‚µ š· 3   H    œ 6 7     œÌI  7 e    D X  Ÿ  W    ¡  a  ¼ ½  ‚  ] ^  _     ÿ m   ¤ „  ù B T Í Ô    !     gÎL¸ t³ =² Æ 2² ¹ € À „N-+¹ † :§ ğ¹ ò =¹ Š šÿï§ '² GĞ¶ V§ N² G» YÒ· -¶ ˜¶ &¶ V¬   J M  2   6   » ¼ 
-½ ¿ À Á 'Â *Ã 4Â AÅ MÇ NÈ eÊ 3   >    g 6 7    c     [U ½   #   ¡  '  ¢ £  N   _     ÿ *   ¤ „ ‹  	ù B ÔÕ  æ   Ö    ¡     '+¶×N§ -¹Û À[M*,¶àš ¬-¹ä šÿæ¬    2      Î Ï Ğ Î %Ò 3        ' 6 7     'ç
+  d e    n     â€”Â» YfÂ· +Â¶ hÂ¶ "mÂ¶ "+Â¶ oÂ¶ "rÂ¶ "Â¶ &MÂ¸ tÂ³ Â² vÂ¶ |>Â² Ã† <Â² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â¹ Å  â„¢ 
+Â² ÂÂ¶ |>Â§ 
+Â² vÂ¶ |>*Â¶ â€™Â§ 'Â² Gâ€Â¶ VÂ§ :Â² GÂ» Yâ€“Â· Â¶ ËœÂ¶ &Â¶ VÂ¬  2 y | T  2   F    6 	 7  8 ! 6 % 9 + : 2 < 8 = E > O ? Y @ c B j C q E | G ~ H â€¢ J 3   H    â€” 6 7     â€” â€º Å“  % r Â   2 e Å¾ Å¸  E , Â  Â¡  O " Â¢ Â£  ~  ] ^  _   # Ã¿ c   i Â¤ â€ â€¹  Ã¹ B T  Â¦ Â§    D     ~Â» YÂ¨Â· +Â¶ "rÂ¶ "Â¶ &MÂ¸ tÂ³ Â² vÂ¶ |>Â² Ã† 2Â² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â¹ Å  â„¢ 
+Â² ÂÂ¶ |>*Â¶ â€™Â§ 'Â² GÂªÂ¶ VÂ§ :Â² GÂ» YÂ¬Â· Â¶ ËœÂ¶ &Â¶ VÂ¬  # ` c T  2   6 
+   N  O  P # R ) S 6 T @ U J V Q X X Z c \ e ] | _ 3   H    ~ 6 7     ~ Â®    h Â   # [ Å¾ Å¸  6 " Â  Â¡  @  Â¢ Â£  e  ] ^  _   " Ã¿ Q   Â¤ Â¤ â€ â€¹  Ã¹ B T  Â¯ Â§    =     yÂ» YÂ°Â· +Â¶ "Â²Â¶ "Â¶ &MÂ¸ tÂ³ Â² vÂ¶ |>Â² Ã† -Â² Â¹ â‚¬ Ã€ â€:,Â¹ Â´ 6Å¾ 
+Â² ÂÂ¶ |>*Â¶ â€™Â§ 'Â² GÂ¸Â¶ VÂ§ :Â² GÂ» YÂºÂ· Â¶ ËœÂ¶ &Â¶ VÂ¬  # [ ^ T  2   6 
+   c  d  e # g ) h 6 i @ j E k L m S o ^ q ` r w t 3   H    y 6 7     y Â®    c Â   # V Å¾ Å¸  6  Â  Â¡  @  Â¼ Â½  `  ] ^  _     Ã¿ L   Â¤ Â¤ â€  Ã¹ B T  Â¾ Â§    D     ~Â» YÂ¿Â· +Â¶ "rÂ¶ "Â¶ &MÂ¸ tÂ³ Â² vÂ¶ |>Â² Ã† 2Â² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â¹ Å  â„¢ 
+Â² ÂÂ¶ |>*Â¶ â€™Â§ 'Â² GÃÂ¶ VÂ§ :Â² GÂ» YÃƒÂ· Â¶ ËœÂ¶ &Â¶ VÂ¬  # ` c T  2   6 
+   y  z  { # } ) ~ 6  @ â‚¬ J Â Q Æ’ X â€¦ c â€¡ e Ë† | Å  3   H    ~ 6 7     ~ Ã…    h Â   # [ Å¾ Å¸  6 " Â  Â¡  @  Â¢ Â£  e  ] ^  _   " Ã¿ Q   Â¤ Â¤ â€ â€¹  Ã¹ B T  Ã† Ã‡    p     Â Â» YÃˆÂ· +Â¶ ÃŠÂ¶ "ÃÂ¶ "+Â¶ Ã‘Â¶ Ã•Ã˜Â¶ "+Â¶ ÃšÂ¶ Ã•ÃÂ¶ "+Â¶ ÃŸÂ¶ "Â²Â¶ "Â¶ &MÂ¸ tÂ³ Â² vÂ¶ |>Â² Ã† -Â² Â¹ â‚¬ Ã€ â€:,Â¹ Â´ 6Å¾ 
+Â² ÂÂ¶ |>*Â¶ â€™Â§ 'Â² GÂ¸Â¶ VÂ§ :Â² GÂ» YÂºÂ· Â¶ ËœÂ¶ &Â¶ VÂ¬  J â€š â€¦ T  2   B    Å½ 	 Â ! Â 9 Å½ = â€˜ C â€™ J â€ P â€¢ ] â€“ g â€” l Ëœ s Å¡ z Å“ â€¦ Å¾ â€¡ Å¸ Å¾ Â¡ 3   H    Â  6 7     Â  Ã¢ Ã£  = c Â   J V Å¾ Å¸  ]  Â  Â¡  g  Â¼ Â½  â€¡  ] ^  _     Ã¿ s   Ã‹ Â¤ â€  Ã¹ B T  Ã¤ Ã¥  Ã¦    Ã§   â€š     â€œÃ¨LÂ» ÃªYÂ· Ã¬MNÂ¸ tÂ³ Â² Ã† VÂ² Â¹ â‚¬ Ã€ â€:+Â¹ â€  :Â§ +Â» Ã­YÂ· Ã¯N-Ã°Â¹ Ã² Â¶ Ãµ-Ã¹Â¹ Ãº Â¶ Ã¾,-Â¶WÂ¹ Å  Å¡Ã¿Ã‘*Â¶ â€™Â§ (Â² GÂ¶ VÂ§ :Â² GÂ» YÂºÂ· Â¶ ËœÂ¶ &Â¶ V,Â°  
+ u x  2   J    Ã›  Ãœ  Ã 
+ ÃŸ  Ã   Ã¡ & Ã¢ 0 Ã£ 3 Ã¤ ; Ã¥ H Ã¦ U Ã§ [ Ã£ e Ã© l Ã« x Ã­ z Ã® â€˜ Ã° 3   H    â€œ 6 7    Â Â    Ë†	
+  
+ â€   & F Â  Â¡  0 < Â¢ Â£  z 
+       Ë†	  _   % Ã¿ 3   Â¤ Ãª Ã­ â€ â€¹  'Ã¹ B  Ã¥  Ã¦      Ã½     Ã¬Â» YÂ· Â²Â¶Â¶ "Â¶ "Â¶ &LÂ» ÃªYÂ· Ã¬MNÂ¸ tÂ³ Â² Ã† â€Â² Â¹ â‚¬ Ã€ â€:+Â¹ â€  :Â§ iÂ»YÂ·!N-Ã°Â¹ Ã² Â¶"-#Â¹ Ã² Â¶%-Ã¹Â¹ Ãº Â¶(-+Â¹- Â¶1Â¶4-7Â¹ Ãº Â¶4-9Â¹ Ãº Â¸;Â¶?,-Â¶WÂ¹ Å  Å¡Ã¿â€œ*Â¶ â€™Â§ )Â² GCÂ¶ VÂ§ :Â² GÂ» YEÂ· Â¶ ËœÂ¶ &Â¶ V,Â°  ' Ã Ã  2   j    Ã´ 
+ Ãµ  Ã´  Ã¶ % Ã· ' Ã¹ - Ãº 3 Ã» @ Ã¼ J Ã½ M Ã¾ U Ã¿ b  p } Å½ Å“ Å¸ Â§ Â­ Â³ Ã½ Â½	 Ã„ Ã
+ Ã’ Ãª 3   H    Ã¬ 6 7    Ã Â   % Ã‡G
+  ' Ã…HI  @ â€ Â  Â¡  J z Â¢ Â£  Ã’ 
+      % Ã‡GJ  _   ' Ã¿ M   Â¤ Ãª â€ â€¹  Ã» eÃ¹ B KL    [     â€Â» YMÂ· ,Â¶ "OÂ¶ "Â¶ Ã•Â¶ &NÂ¸ tÂ³ Â² vÂ¶ |6Â² Ã† .Â² Â¹ â‚¬ Ã€ â€:-Â¹ Â´ 6Å¾ Â² ÂÂ¶ |6*Â¶ â€™Â§ )Â² GQÂ¶ VÂ§ :Â² GÂ» YSÂ· Â¶ ËœÂ¶ &Â¶ VÂ¬  * d g T  2   >       " * 0 = G L T [! g# i$ Â& 3   R    â€ 6 7     â€U Â½    â€:    h Â   * Z Å¾ Å¸  =  Â  Â¡  G  Â¼ Â½  i  ] ^  _   ! Ã¿ T   Â¤ Â¤ â€  Ã¹ B T VW  Ã¦   X        Ã¸Â» YYÂ· Â¶ Ã•Â¶ &MÂ» ÃªYÂ· Ã¬N:Â¸ tÂ³ Â² Ã† ÂªÂ² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â§ Â»[YÂ·]:^Â¹ Ã² Â¶`#Â¹ Ã² Â¶abÂ¹ Ã² Â¶dgÂ¹ Ãº Â¶ilÂ¹ Ã² Â¶nqÂ¹ Ãº Â¶svÂ¹ Ãº Â¸xÂ¶{-Â¶WÂ¹ Å  Å¡Ã¿}*Â¶ â€™Â§ )Â² G~Â¶ VÂ§ :Â² GÂ» Yâ‚¬Â· Â¶ ËœÂ¶ &Â¶ V-Â°   Ã™ Ãœ  2   n   * 
+- * . / 1 #2 )3 64 @5 C6 L7 [8 j9 y: Ë†; â€”< Â¦= Âª> Â²= Â¸? Â¿5 Ã‰A ÃC ÃœE ÃF Ã¶H 3   R    Ã¸ 6 7     Ã¸U Â½   Ã¦ Â    Ãâ€š
+   Ã›Æ’â€  6 Å¡ Â  Â¡  @ Â Â¢ Â£  Ã 
+       Ãâ€šâ€¦  _   ( Ã¿ C   Â¤ Ãª[ â€ â€¹  Ã» {Ã¹ B â€ â€¡    r     ÂÂ» YË†Â· -Â¶ "Å Â¶ "Â¶ Ã•Å’Â¶ "Â¶ Ã•Â¶ &:Â¸ tÂ³ Â² vÂ¶ |6Â² Ã† /Â² Â¹ â‚¬ Ã€ â€:Â¹ Â´ 6Å¾ Â² ÂÂ¶ |6*Â¶ â€™Â§ )Â² GÅ½Â¶ VÂ§ :Â² GÂ» YÂÂ· Â¶ ËœÂ¶ &Â¶ VÂ¬  5 p s T  2   >   L M "L 'N -O 5Q ;R HS ST XU `W gY s[ u\ Â^ 3   \ 	   Â 6 7     ÂU Â½    Ââ€™ Â½    Â:   ' i Â   5 [ Å¾ Å¸  H  Â  Â¡  S  Â¼ Â½  u  ] ^  _   " Ã¿ `   Â¤ Â¤ â€  Ã¹ B T â€œW  Ã¦   â€   Ã¡     Ã•Â» Yâ€¢Â· Â¶ Ã•Â¶ &MÂ» ÃªYÂ· Ã¬N:Â¸ tÂ³ Â² Ã† â€¡Â² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â§ \Â» Ã‹YÂ·â€”:Ã°Â¹ Ã² Â¶Ëœâ„¢Â¹ Ã² Â¶â€ºÃ¹Â¹ Ãº Â¶Å¾Å¸Â¹ Ã² Â¶Â¡Â¢Â¹ Ãº Â¶Â¤-Â¶WÂ¹ Å  Å¡Ã¿Â *Â¶ â€™Â§ )Â² GÂ§Â¶ VÂ§ :Â² GÂ» YÂ©Â· Â¶ ËœÂ¶ &Â¶ V-Â°   Â¶ Â¹  2   Z   b c d f #g )h 6i @j Ck Ll Zm in wo â€ p â€¢q Å“j Â¦s Â­u Â°v Â¹x Â»y Ã“{ 3   R    Ã• 6 7     Ã•Â« Â½   Ãƒ Â    Â»Â¬
+   Â¸Â­ Ã£  6 w Â  Â¡  @ m Â¢ Â£  Â» 
+       Â»Â¬Â®  _   ( Ã¿ C   Â¤ Ãª Ã‹ â€ â€¹  Ã» XÃ¹ B W  Ã¦   Â¯   
+     ÃªÂ» YÂ°Â· Â¶ Ã•Â¶ &MÂ» ÃªYÂ· Ã¬N:Â¸ tÂ³ Â² Ã† Å“Â² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â§ qÂ»YÂ·!:Ã°Â¹ Ã² Â¶"#Â¹ Ã² Â¶%Ã¹Â¹ Ãº Â¶(+Â¹- Â¶1Â¶47Â¹ Ãº Â¶49Â¹ Ãº Â¸;Â¶?-Â¶WÂ¹ Å  Å¡Ã¿â€¹*Â¶ â€™Â§ )Â² GÂ²Â¶ VÂ§ :Â² GÂ» YÂ´Â· Â¶ ËœÂ¶ &Â¶ V-Â°   Ã‹ Ã  2   n    
+â‚¬  Â â€š â€ #â€¦ )â€  6â€¡ @Ë† Câ€° LÅ  Zâ€¹ iÅ’ wÂ â€°Å½ ËœÂ Å“Â Â¤Â Âªâ€™ Â±Ë† Â»â€ Ã‚â€“ Ã…â€” Ãâ„¢ ÃÅ¡ Ã¨Å“ 3   R    Ãª 6 7     ÃªÂ¶ Â½   Ã˜ Â    ÃG
+   ÃHI  6 Å’ Â  Â¡  @ â€š Â¢ Â£  Ã 
+       ÃGJ  _   ( Ã¿ C   Â¤ Ãª â€ â€¹  Ã» mÃ¹ B Â·Â¸    x     Å“Â» YÂ¹Â· +Â¶Â»Â¶ Ã•ÃÂ¶ "+Â¶Â¾Â¶ "ÃÂ¶ "+Â¶ÃƒÂ¶Â¶ "Ã†Â¶ "Â¶ &MÂ¸ tÂ³ Â² vÂ¶ |>Â² Ã† -Â² Â¹ â‚¬ Ã€ â€:,Â¹ Â´ 6Å¾ 
+Â² ÂÂ¶ |>*Â¶ â€™Â§ )Â² GÃˆÂ¶ VÂ§ :Â² GÂ» YÃŠÂ· Â¶ ËœÂ¶ &Â¶ VÂ¬  D } â‚¬ T  2   N   Â  
+Â¢ Â£ Â¤ Â¥ #Â¦ 3Â  7Â§ =Â¨ DÂª JÂ« WÂ¬ aÂ­ fÂ® mÂ° tÂ² â‚¬Â´ â€šÂµ Å¡Â· 3   H    Å“ 6 7     Å“ÃŒI  7 e Â   D X Å¾ Å¸  W  Â  Â¡  a  Â¼ Â½  â€š  ] ^  _     Ã¿ m   Â¤ â€  Ã¹ B T Ã Ã”    !     gÃLÂ¸ tÂ³ =Â² Ã† 2Â² Â¹ â‚¬ Ã€ â€N-+Â¹ â€  :Â§ 
+Ã°Â¹ Ã² =Â¹ Å  Å¡Ã¿Ã¯Â§ 'Â² GÃÂ¶ VÂ§ NÂ² GÂ» YÃ’Â· -Â¶ ËœÂ¶ &Â¶ VÂ¬   J M  2   6 
+  Â» Â¼ 
+Â½ Â¿ Ã€ Ã 'Ã‚ *Ãƒ 4Ã‚ AÃ… MÃ‡ NÃˆ eÃŠ 3   >    g 6 7    c Â    [U Â½   # Â  Â¡  '  Â¢ Â£  N 
+  _     Ã¿ *   Â¤ â€ â€¹  	Ã¹ B Ã”Ã•  Ã¦   Ã–    Â¡     '+Â¶Ã—NÂ§ -Â¹Ã› Ã€[M*,Â¶Ã Å¡ Â¬-Â¹Ã¤ Å¡Ã¿Ã¦Â¬    2      Ã Ã Ã Ã %Ã’ 3        ' 6 7     'Ã§
    
-‚„        'ç…  _    ÿ    ê Ü   âã    ~     ¢» Yè· +¶ê¶ ÕØ¶ "+¶í¶ ÕØ¶ "+¶ğ¶ Õİ¶ "+¶ñ¶ô¶ "²¶ "¶ &M² v¶ |>¸ t³ ² Æ )² ¹ € À „:,¹ ´ 6 3² ¶ |>§ )² G÷¶ V§ :² G» Yù· ¶ ˜¶ &¶ V¬  H ƒ †  2   N   Ö 
-Ø Ù Ú Û "Ü =Ö AŞ Hà Ná Tâ aã kä på zç }è †ê ˆë  í 3   H    ¢ 6 7     ¢‚„  A a    H Z  Ÿ  a    ¡  k  ¼ ½  ˆ   _     ÿ w  [ ¤ „  ù B ûW  æ   ü   ÿ     î» Yı· ¶ Õ¶ &M» êY· ìN¸ t³ ² Æ £² ¹ € À „:,¹ † :§ |»ÿY·:¹ ò ¶¹ ò ¶¹ ú ¶
-g¹ ú ¶l¹ ò ¶¹ ò ¶q¹ ú ¶-¶W¹ Š šÿ€§ )² G¶ V§ :² G» Y· ¶ ˜¶ &¶ V-°   Ï Ò  2   b   ñ 
-õ ñ ö ø  ù &ú 3û =ü @ş Iÿ X  g v … ” £ ² ¹ü Æ
- É Ò Ô ì 3   R    î 6 7     î¶ ½   Ü     Ô
-  3 “   ¡  = ‰ ¢ £  I p  Ô        Ô  _   % ÿ @   ¤ ê „ ‹  û xù B        õ[ @ @
+â€šâ€        'Ã§â€¦  _    Ã¿    Ãª Ãœ   Ã¢Ã£    ~     Â¢Â» YÃ¨Â· +Â¶ÃªÂ¶ Ã•Ã˜Â¶ "+Â¶Ã­Â¶ Ã•Ã˜Â¶ "+Â¶Ã°Â¶ Ã•ÃÂ¶ "+Â¶Ã±Â¶Ã´Â¶ "Â²Â¶ "Â¶ &MÂ² vÂ¶ |>Â¸ tÂ³ Â² Ã† )Â² Â¹ â‚¬ Ã€ â€:,Â¹ Â´ 6Å¾ 3Â² ÂÂ¶ |>Â§ )Â² GÃ·Â¶ VÂ§ :Â² GÂ» YÃ¹Â· Â¶ ËœÂ¶ &Â¶ VÂ¬  H Æ’ â€   2   N   Ã– 
+Ã˜ Ã™ Ãš Ã› "Ãœ =Ã– AÃ HÃ  NÃ¡ TÃ¢ aÃ£ kÃ¤ pÃ¥ zÃ§ }Ã¨ â€ Ãª Ë†Ã« Â Ã­ 3   H    Â¢ 6 7     Â¢â€šâ€  A a Â   H Z Å¾ Å¸  a  Â  Â¡  k  Â¼ Â½  Ë† 
+  _     Ã¿ w  [ Â¤ â€  Ã¹ B Ã»W  Ã¦   Ã¼   Ã¿     Ã®Â» YÃ½Â· Â¶ Ã•Â¶ &MÂ» ÃªYÂ· Ã¬NÂ¸ tÂ³ Â² Ã† Â£Â² Â¹ â‚¬ Ã€ â€:,Â¹ â€  :Â§ |Â»Ã¿YÂ·:Â¹ Ã² Â¶Â¹ Ã² Â¶Â¹ Ãº Â¶
+gÂ¹ Ãº Â¶lÂ¹ Ã² Â¶Â¹ Ã² Â¶qÂ¹ Ãº Â¶-Â¶WÂ¹ Å  Å¡Ã¿â‚¬Â§ )Â² GÂ¶ VÂ§ :Â² GÂ» YÂ· Â¶ ËœÂ¶ &Â¶ V-Â°   Ã Ã’  2   b   Ã± 
+Ãµ Ã± Ã¶ Ã¸  Ã¹ &Ãº 3Ã» =Ã¼ @Ã¾ IÃ¿ X  g v â€¦ â€ Â£ Â² Â¹Ã¼ Ã†
+ Ã‰ Ã’
+ Ã” Ã¬ 3   R    Ã® 6 7     Ã®Â¶ Â½   Ãœ Â    Ã”
+  3 â€œ Â  Â¡  = â€° Â¢ Â£  I p  Ã” 
+       Ã”  _   % Ã¿ @   Â¤ Ãª â€ â€¹  Ã» xÃ¹ B        Ãµ[ @ @
